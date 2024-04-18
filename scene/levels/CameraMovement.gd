@@ -16,21 +16,21 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	
 func _process(delta):
-	#position = player.position
+	position = player.position
 	if Input.is_action_just_pressed("space"):
 		position = player.position
 	
-	#move the screen if mouse close enough to the border
-	var m_pos = get_viewport().get_mouse_position()
-	
-	if m_pos.x <= screen_limits :
-		position.x -= move_offset
-	if m_pos.x >= screen_size.x - screen_limits : 
-		position.x += move_offset
-	if m_pos.y <= screen_limits :
-		position.y -= move_offset
-	if m_pos.y >= screen_size.y - screen_limits :
-		position.y += move_offset
+	##move the screen if mouse close enough to the border
+	#var m_pos = get_viewport().get_mouse_position()
+	#
+	#if m_pos.x <= screen_limits :
+		#position.x -= move_offset
+	#if m_pos.x >= screen_size.x - screen_limits : 
+		#position.x += move_offset
+	#if m_pos.y <= screen_limits :
+		#position.y -= move_offset
+	#if m_pos.y >= screen_size.y - screen_limits :
+		#position.y += move_offset
 	
 	
 	

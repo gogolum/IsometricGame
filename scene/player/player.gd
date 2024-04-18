@@ -12,12 +12,14 @@ var curr_state = states.IDLE
 var target_coords = null
 
 #movement variables
-const speed : float = 30000.0
+const speed : float = 10000.0
 
 func _process(delta):
-	
+	print(delta)
 	#Input handling
 	if Input.is_action_just_pressed("right_click"):
+		
+		change_state(states.RUNNING)
 		
 		#spawn an instance of the select point
 		var select_point_instance = select_point.instantiate()
@@ -43,7 +45,8 @@ func makepath() -> void:
 		nav_agent.target_position = target_coords
 
 func _on_navigation_agent_2d_navigation_finished():
-	print("finished")
+	
+	change_state(states.IDLE)
 	target_coords = null
 
 #state machine methods
