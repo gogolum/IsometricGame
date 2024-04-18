@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://baw0nnvu1sbu5"]
+
+[ext_resource type="Texture2D" uid="uid://clklgauvalgky" path="res://texture/dragon_.png" id="1_6p18u"]
+[ext_resource type="Script" path="res://scene/player/player.gd" id="1_l2k5v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tat8k"]
+atlas = ExtResource("1_6p18u")
+region = Rect2(5, 6, 14, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_605qv"]
+size = Vector2(11.8, 18.3)
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_l2k5v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.005, -9.17)
+texture = SubResource("AtlasTexture_tat8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.2, -9.2)
+shape = SubResource("RectangleShape2D_605qv")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]

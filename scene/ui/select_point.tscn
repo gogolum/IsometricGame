@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqin80wfnn0pf"]
+
+[ext_resource type="Script" path="res://SelectPoint.gd" id="1_lxeel"]
+[ext_resource type="Texture2D" uid="uid://c4pjhlk0elui5" path="res://select_point.png" id="2_trcn4"]
+
+[sub_resource type="Animation" id="Animation_ogho0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointTexture:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_t3qxd"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointTexture:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2le07"]
+_data = {
+"RESET": SubResource("Animation_ogho0"),
+"fade_out": SubResource("Animation_t3qxd")
+}
+
+[node name="SelectPoint" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-10, -10)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_lxeel")
+
+[node name="PointTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_trcn4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PointTexture"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_2le07")
+}
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
